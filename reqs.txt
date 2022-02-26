@@ -1,0 +1,4 @@
+flask
+jinja2
+PyQt5
+PyQtWebEngine
