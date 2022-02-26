@@ -1,7 +1,7 @@
 # Modules
 import os
 import random
-from multiprocessing import Process
+from .kthread import KThread
 from flask import Flask, send_from_directory
 from jinja2 import Environment, FileSystemLoader
 
@@ -43,8 +43,8 @@ class Nitrogen(object):
 
     def start(self, start_location: str = "index.html") -> None:
         port = self.generate_port()
-        proc = Process(target = self.app.run, kwargs = {"host": "localhost", "port": port})
-        proc.start()
+        thread = KThread(target = self.app.run, kwargs = {"host": "localhost", "port": port})
+        thread.start()
         try:
             load_page(f"http://localhost:{port}/{start_location}")
 
@@ -52,5 +52,4 @@ class Nitrogen(object):
             self.stop()
             raise err
 
-        proc.terminate()
-        proc.join()
+        thread.terminate()
