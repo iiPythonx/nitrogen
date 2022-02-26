@@ -1,7 +1,7 @@
 # Nitrogen
 ---
 
-Nitrogen is a Python module designed to make desktop app development in Python easier. It utilizes [Flask](), [Jinja2](), and [web technologies]() to create the Python equivalent of [Electron]().
+Nitrogen is a Python module designed to make desktop app development in Python easier. It utilizes [Flask](https://github.com/pallets/flask), [Jinja2](https://github.com/pallets/jinja), and [web technologies](https://en.wikibooks.org/wiki/Introduction_to_Information_Technology/Web_Technologies) to create the Python equivalent of [Electron](https://github.com/electron/electron).
 
 ### Installation
 
