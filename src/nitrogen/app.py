@@ -1,10 +1,10 @@
 # Modules
 import os
 import random
-from .kthread import KThread
 from flask import Flask, send_from_directory
 from jinja2 import Environment, FileSystemLoader
 
+from .kthread import KThread
 from .webpage import load_page
 
 # Flask app maker
