@@ -41,12 +41,12 @@ class Nitrogen(object):
     def generate_port(self) -> int:
         return random.randint(10000, 65535)
 
-    def start(self, start_location: str = "index.html") -> None:
+    def start(self, start_location: str = "index.html", fullscreen: bool = False) -> None:
         port = self.generate_port()
         thread = KThread(target = self.app.run, kwargs = {"host": "localhost", "port": port})
         thread.start()
         try:
-            load_page(f"http://localhost:{port}/{start_location}")
+            load_page(f"http://localhost:{port}/{start_location}", fullscreen)
 
         except Exception as err:
             self.stop()

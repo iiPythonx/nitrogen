@@ -21,8 +21,14 @@ class MainWindow(QMainWindow):
         self.setWindowTitle(self.browser.page().title())
 
 # Launcher
-def load_page(url: str) -> None:
+def load_page(url: str, fullscreen: bool) -> None:
     app = QApplication([])
     app.setApplicationName("Nitrogen")
     w = MainWindow(url)  # noqa
+
+    # Check fullscreen status
+    if fullscreen:
+        w.showFullScreen()
+
+    # Launch app
     app.exec_()
