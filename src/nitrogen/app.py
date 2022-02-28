@@ -62,6 +62,9 @@ class Nitrogen(object):
     def call(self, fn: str) -> str:
         return f"fetch('/_/fncallback?fn={fn}')"
 
+    def route(self, rule: str, **options) -> FunctionType:
+        return self.app.route(rule, **options)
+
     def generate_port(self) -> int:
         return random.randint(10000, 65535)
 
