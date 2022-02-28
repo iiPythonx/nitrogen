@@ -12,7 +12,7 @@ def make_app(source_dir: str, use_jinja: bool = True) -> Flask:
     source_dir = os.path.abspath(source_dir)
 
     # Create flask app
-    app = Flask("Nitrogen")
+    app = Flask("Nitrogen", template_folder = source_dir)
     env = Environment(loader = FileSystemLoader(source_dir))
 
     # Primary route
