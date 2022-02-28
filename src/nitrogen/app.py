@@ -36,7 +36,7 @@ def make_app(
         except Exception:
             args = []
 
-        return nitrogen.functions[fn](*args) or "200 OK"
+        return str(nitrogen.functions[fn](*args) or "200 OK")
 
     @app.route("/<path:path>")
     def get_file(path: str) -> None:
