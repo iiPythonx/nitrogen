@@ -1,9 +1,11 @@
 # Modules
 import os
+import json
 import random
 from types import FunctionType
-from flask import Flask, abort, request, send_from_directory
+from base64 import b64encode, b64decode
 from jinja2 import Environment, FileSystemLoader
+from flask import Flask, abort, request, send_from_directory
 
 from .kthread import KThread
 from .webpage import load_page
@@ -28,7 +30,13 @@ def make_app(
         if fn not in nitrogen.functions:
             return abort(404)
 
-        return nitrogen.functions[fn]() or "200 OK"
+        try:
+            args = json.loads(b64decode(request.args.get("args")))
+
+        except Exception:
+            args = []
+
+        return nitrogen.functions[fn](*args) or "200 OK"
 
     @app.route("/<path:path>")
     def get_file(path: str) -> None:
@@ -59,8 +67,8 @@ class Nitrogen(object):
             "nitrogen": self
         })
 
-    def call(self, fn: str) -> str:
-        return f"fetch('/_/fncallback?fn={fn}')"
+    def call(self, fn: str, *args) -> str:
+        return f"fetch('/_/fncallback?fn={fn}&args={b64encode(json.dumps(args).encode()).decode()}')"
 
     def route(self, rule: str, **options) -> FunctionType:
         return self.app.route(rule, **options)
