@@ -1,4 +1,7 @@
 flask
 jinja2
+eventlet
+requests
+flask-socketio
 PyQt5
 PyQtWebEngine

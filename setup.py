@@ -1,8 +1,9 @@
 # Modules
 import os
+import site
 import codecs
 import pathlib
-import os.path
+from glob import glob
 from setuptools import setup
 
 # Grab our current path
@@ -51,7 +52,10 @@ setup(
     license = "MIT",
     url = "https://github.com/ii-Python/nitrogen",
     python_requires = ">=3.8, <4",
-    requires = open("reqs.txt", "r").read().splitlines(),
+    install_requires = open("reqs.txt", "r").read().splitlines(),
     package_dir = {"": "src"},
     packages = find_packages("src"),
+    data_files = [
+        (os.path.join(site.USER_SITE[len(os.path.abspath(os.path.join(site.USER_SITE, "../" * 3))):].strip("/\\"), "nitrogen/js"), glob("src/nitrogen/js/*"))
+    ]
 )
