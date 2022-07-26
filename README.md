@@ -46,18 +46,33 @@ When creating a `Nitrogen` object, you can pass the following kwargs:
 
 After you make the `Nitrogen` object, and you use `app.start()`, you can pass the following:
 + `start_location`; default: "index.html"; This is the first page Nitrogen will render upon start
++ `fullscreen`; default: False; Whether or not to automatically fullscreen the Qt5 window
 
-### Custom Flask Functionality
+### Custom  Functionality
 
-Since Nitrogen uses Flask internally, it is possible to overwrite globals, routes, etc.  
-To do so, you can reference `Nitrogen.app`, like so:
+Since Nitrogen uses Flask and Socket.io internally, it is possible to overwrite globals, routes, etc.  
+To do so, you can reference `Nitrogen.route` and others, like so:
 ```py
 from nitrogen import Nitrogen
 app = Nitrogen(source_dir = "src", use_jinja = True)
 
-@app.app.route("/something")
+# The Nitrogen class has .route() as a convenience wrapper
+# around the Flask apps .route function.
+@app.route("/something")
 def something():
     return "hello, this is something."
+
+# Alternatively, you can add socket.io methods:
+@app.on("someevent")
+def dosomething(a, b, c):
+    print(a, b, c)
+    app.emit("didsomething")
+
+# To handle this in JS, you use the emit() and on() methods
+# that are automatically included in your HTML templates.
+
+# emit(event, ...args)
+# on(event, callback)
 
 app.start()
 ```
