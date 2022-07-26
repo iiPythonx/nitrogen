@@ -38,7 +38,7 @@ def make_app(
     # Primary routes
     @app.route("/<path:path>", methods = ["GET"])
     def get_file(path: str) -> None:
-        if path.split(".")[-1] in ["html", "html", "jinja"] and use_jinja:
+        if path.split(".")[-1] in ["htm", "html", "jinja"] and use_jinja:
             return socketio_script + "\n" + env.get_template(path).render({})
 
         return send_from_directory(source_dir, path, conditional = True)
@@ -97,10 +97,10 @@ class Nitrogen(object):
             pass
 
         except Exception as e:
-            print("[Nebula -] Failed to stop Flask server")
+            print("[Nitrogen -] Failed to stop Flask server")
             raise e
 
-        print("[Nebula +] Stopped Flask server")
+        print("[Nitrogen +] Stopped Flask server")
 
     def route(self, rule: str, **options) -> FunctionType:
         return self.app.route(rule, **options)
@@ -113,7 +113,7 @@ class Nitrogen(object):
             args = [self.app],
             kwargs = {"host": "localhost", "port": self._runtime["port"]}
         ).start()
-        print(f"[Nebula +] Launched Flask on LOCAL address http://localhost:{self._runtime['port']}")
+        print(f"[Nitrogen +] Launched Flask on LOCAL address http://localhost:{self._runtime['port']}")
 
         # Launch our Qt5 application
         load_page(f"http://localhost:{self._runtime['port']}/{start_location}", fullscreen)
