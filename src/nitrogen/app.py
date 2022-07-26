@@ -1,3 +1,5 @@
+# Copyright 2022 iiPython
+
 # Modules
 import os
 import random
