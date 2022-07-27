@@ -7,13 +7,13 @@ Nitrogen is a Python module designed to make desktop app development in Python e
 
 To install from PyPi **(recommended)**:
 ```sh
-pip install nitrogenfw
+python3 -m pip install nitrogenfw
 ```
 or, to install from source:
 ```sh
-git clone https://github.com/ii-Python/nitrogen
+git clone https://github.com/iiPythonx/nitrogen
 cd nitrogen
-python3 setup.py install  # or pip install .
+python3 -m pip install .
 ```
 
 ### Module usage
